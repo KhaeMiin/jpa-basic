@@ -98,13 +98,13 @@ public class JpaMain {
 
             em.flush();*/
 
-            //영속 상태
+/*            //영속 상태
             Member member = em.find(Member.class, 150L);
             member.setName("AAAAA"); // DIRTY CHECKING
             //준영속 상태로 만들기(즉 JPA에서 관리를 안함):
 //            em.detach(member);//특정 상태만 준영속으로 만들기
 //            em.clear(); //통으로 준영속 만들기
-            em.close(); //영속성 컨텍스트를 종료
+            em.close(); //영속성 컨텍스트를 종료*/
 
             System.out.println("==================================");
             /**
