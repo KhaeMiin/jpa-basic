@@ -51,12 +51,30 @@ logging.level.org.hibernate.type.descriptor.BasicBinder=TRACE
 
 
 ## @Annotation
--   `@Entity`: 테이블에 대응되는 도메인 클래스를 의미, JPA가 동작할 때, 데이터를 다루는 작업 단위이기도 함
+- `@Entity`: 테이블에 대응되는 도메인 클래스를 의미, JPA가 동작할 때, 데이터를 다루는 작업 단위이기도 함
 	-  기본 생성자 필수(파라미터가 없는 public 또는 protected 생성자)
--   `@Table`: 테이블을 생성할 때 사용할 정보를 기술할 수 있음, 기술하지 않으면 클래스 명으로 테이블을 생성
--   `@Id`:  **Primary Key**를 지정
--   `@GeneratedValue`: Primary Key 컬럼의 데이터를 삽입할 때, 사용할 전략,  **GenerationType.IDENTITY**로 지정 시 PK 생성 전략을 데이터베이스에 위임
--   `@Enumerated`: Enum 타입을 사용시 지정
+- `@Table`: 테이블을 생성할 때 사용할 정보를 기술할 수 있음, 기술하지 않으면 클래스 명으로 테이블을 생성
+- `@Id`:  **Primary Key**를 지정
+- `@GeneratedValue`: Primary Key 컬럼의 데이터를 삽입할 때, 사용할 전략,  **GenerationType.IDENTITY**로 지정 시 PK 생성 전략을 데이터베이스에 위임
+- `@Enumerated`: Enum 타입을 사용시 지정
+- `@Column`: 
+	- `name`: 필드와 맵핑할 테이블의 컬럼 이름
+	- `updatable, insertable`: 등록,변경 가능 여부(false시 DB에서 강제로 치는것 아닌이상 update, insert되지 않음)
+	- `nullable`: =false 경우 not null 제약조건이 붙는다. (null 값의 허용 여부 설정)
+	- `unique`: 한 컬럼에 간단한 유니크 제약조건을 걸 수 있다. (잘 사용하지 않음) 
+	- `length`: varchar 길이 지정 가능 (String 타입에만 사용가능)
+	- `columnDefinition`: 데이터베이스 컬럼 정보를 직접 줄 수 있다. <br>
+	ex) columnDefinition="varchar(100) default ‘EMPTY'"
+- `@Enumerated`: 자바 enum 타입을 매핑할 때 사용
+	- **주의: ORDINAL 사용 금지** : enum파일이 수정, 추가되는 순간 순서변경으로 기존데이터 다 꼬여버림
+	- `@Enumerated(EnumType.STRING)`: enum 이름을 DB에 저장
+	- `@Enumerated(EnumType.ORDINAL)`: enum 순서를 DB에 저장 (0,1,2 이런식으로)
+- `Temporal`: 날짜 타입(java.util.Date, java.util.Calendar)을 매핑할 때 사용
+	- 자바 8 이후에 나온 **LocalDate, LocalDateTime을 사용할 때는 생략 가능**(최신 하이버네이트 지원) 
+- `@Lob`: 데이터베이스 BLOB, CLOB 타입과 맵핑
+- `@Transient`: 필드 맵핑 안함
+	- 데이터베이스에 저장X, 조회X
+	- 메모리상에서만 임시로 값을 보관하고 싶을 때 사용 
 
 
 ## JPA 구동방식
