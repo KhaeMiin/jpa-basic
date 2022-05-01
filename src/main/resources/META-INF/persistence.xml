@@ -18,7 +18,7 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
             <!--<property name="hibernate.jdbc.batch_size" value="10"/>-->
-            <property name="hibernate.hbm2ddl.auto" value="update" /><!--스키마 자동생성 주의: 운영장비에서는 절대 create, drop,update 사용 금지-->
+            <property name="hibernate.hbm2ddl.auto" value="create" /><!--스키마 자동생성 주의: 운영장비에서는 절대 create, drop,update 사용 금지-->
             <!-- 개발 초기 단계에 create 또는 update
             테스트 서버는 update(update 그렇게 추천하지 않음) 또는 validate
             스테이징과 운영 서버는 validate 또는 none-->

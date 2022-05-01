@@ -106,6 +106,14 @@ public class JpaMain {
 //            em.clear(); //통으로 준영속 만들기
             em.close(); //영속성 컨텍스트를 종료*/
 
+
+            Member2 member2 = new Member2();
+//            member2.setId("ID_A");
+            member2.setUsername("C");
+
+            System.out.println("==================================");
+            em.persist(member2);
+            System.out.println("member2.getId() = " + member2.getId());
             System.out.println("==================================");
             /**
              * transaction.commit() 순간 쓰기 지연 SQL 저장소에 있던 SQL을 DB에 보낸다.
