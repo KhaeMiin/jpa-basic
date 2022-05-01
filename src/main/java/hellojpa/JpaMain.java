@@ -9,6 +9,13 @@ import java.util.List;
 public class JpaMain {
 
     public static void main(String[] args) {
+//        jpaTest1(); //기본 CRUD와 기본키 수업
+
+    }
+
+
+
+    private static void jpaTest1() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
         EntityManager em = emf.createEntityManager();
@@ -21,7 +28,7 @@ public class JpaMain {
              * 저장, 수정, 삭제
              */
             //저장
-//            Member member = new Member();
+//            Member1 member = new Member1();
 //            member.setId(2L);
 //            member.setName("helloB");
 //            em.persist(member); //저장
