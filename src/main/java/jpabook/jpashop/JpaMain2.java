@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 public class JpaMain2 {
 
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+/*        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
         EntityManager em = emf.createEntityManager();
 
@@ -31,6 +31,6 @@ public class JpaMain2 {
             em.close();
         }
 
-        emf.close();
+        emf.close();*/
     }
 }

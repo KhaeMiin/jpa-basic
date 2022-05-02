@@ -14,7 +14,7 @@ public class Order {
     @Column(name = "MEMBER_ID")
     private Long memberId;
 
-    private Member member;
+/*    private Member member;
 
     public Member getMember() {
         return member;
@@ -22,7 +22,7 @@ public class Order {
 
     public void setMember(Member member) {
         this.member = member;
-    }
+    }*/
 
     private LocalDateTime orderDate;
 
