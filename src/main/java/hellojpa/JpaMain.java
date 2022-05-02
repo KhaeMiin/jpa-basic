@@ -11,7 +11,7 @@ public class JpaMain {
     public static void main(String[] args) {
 //        jpaTest1(); //기본 CRUD와 기본키 수업
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+       /* EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
         EntityManager em = emf.createEntityManager();
 
@@ -54,7 +54,7 @@ public class JpaMain {
 
 
 
-/*            Member3 findMember = em.find(Member3.class, member.getId());
+*//*            Member3 findMember = em.find(Member3.class, member.getId());
 
 //            Team findTeam = findMember.getTeam();
 
@@ -62,7 +62,7 @@ public class JpaMain {
 
             for (Member3 m : members) {
                 System.out.println("m = " + m.getUsername());
-            }*/
+            }*//*
 
 
             tx.commit();
@@ -73,7 +73,7 @@ public class JpaMain {
         }
 
         emf.close();
-
+*/
     }
 
 

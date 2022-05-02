@@ -2,6 +2,7 @@ package jpabook.jpashop;
 
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +12,7 @@ import javax.persistence.Persistence;
 public class JpaMain2 {
 
     public static void main(String[] args) {
-/*        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
         EntityManager em = emf.createEntityManager();
 
@@ -20,9 +21,9 @@ public class JpaMain2 {
 
         try {
 
-            Order order = em.find(Order.class, 1L);
-            Long memberId = order.getMemberId();
-
+            Order order = new Order();
+            order.addOrderItem(new OrderItem()); //양방향시
+            
 
             tx.commit();
         } catch (Exception e) {
@@ -31,6 +32,6 @@ public class JpaMain2 {
             em.close();
         }
 
-        emf.close();*/
+        emf.close();
     }
 }
