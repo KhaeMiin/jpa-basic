@@ -80,31 +80,77 @@ logging.level.org.hibernate.type.descriptor.BasicBinder=TRACE
 ## JPA 구동방식
 1. Persistence 클래스 시작
 2. 설정 정보 조회
-	- 스프링 부트 없이 순수하게 JPA,하이버네이트 사용시 resources폴더안에 META-INF폴더 생성 후 persistence.xml 파일을 생성해서 직접 사용해야합니다. 
-	```
-	//persistence.xml 
-	 <?xml version="1.0" encoding="UTF-8"?>  
-	 <persistence version="2.2"  
-	  xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-	  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">  
-	 <persistence-unit name="hello">  
-	 <properties>  <!-- 필수 속성 -->  
-	 <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>  
-	 <property name="javax.persistence.jdbc.user" value="sa"/>  
-	 <property name="javax.persistence.jdbc.password" value=""/>  
-	 <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>  
-	 <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>  
-	<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>-->  
-	 <!--dialect: 이런식으로 사용하면 해당 SQL 데이터베이스 방언 지원-->  
+    - 스프링 부트 없이 순수하게 JPA,하이버네이트 사용시 resources폴더안에 META-INF폴더 생성 후 persistence.xml 파일을 생성해서 직접 사용해야합니다. 
+    ```
+    //persistence.xml 
+     <?xml version="1.0" encoding="UTF-8"?>  
+     <persistence version="2.2"  
+      xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+      xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">  
+     <persistence-unit name="hello">  
+     <properties>  <!-- 필수 속성 -->  
+     <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>  
+     <property name="javax.persistence.jdbc.user" value="sa"/>  
+     <property name="javax.persistence.jdbc.password" value=""/>  
+     <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>  
+     <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>  
+    <!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>-->  
+     <!--dialect: 이런식으로 사용하면 해당 SQL 데이터베이스 방언 지원-->  
 	  
-	 <!-- 옵션 -->  
-	 <property name="hibernate.show_sql" value="true"/>  
-	 <property name="hibernate.format_sql" value="true"/>  
-	 <property name="hibernate.use_sql_comments" value="true"/>  
-	 <!--<property name="hibernate.jdbc.batch_size" value="10"/>-->  
-	 <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->  </properties>  
-	 </persistence-unit></persistence>
-	```
-	- 스프링 부트를 통해서 JPA를 사용하게 되면 스프링 부트가 제공하는 application.yml을 참고해서 사용합니다.
+     <!-- 옵션 -->  
+     <property name="hibernate.show_sql" value="true"/>  
+     <property name="hibernate.format_sql" value="true"/>  
+     <property name="hibernate.use_sql_comments" value="true"/>  
+     <!--<property name="hibernate.jdbc.batch_size" value="10"/>-->  
+     <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->  </properties>  
+     </persistence-unit></persistence>
+    ```
+    - 스프링 부트를 통해서 JPA를 사용하게 되면 스프링 부트가 제공하는 application.yml을 참고해서 사용합니다.
 3. 설정 정보를 참고하여 EntityManagerFactory 생성
 4. EntityManager 생성
+
+## JPA 동작 방식
+JPA는 애플리케이션(JAVA애플리케이션)과 JDBC 사이에서 동작
+### 등록
+1. DAO에서 EntityObject를 PERSIST(즉, 객체를 넘긴다)
+2. JPA가 Entity 분석(객체 분석)
+3. 적절한 INSET SQL 생성
+4. JDBC API사용해서 DB에 보낸다.(DB통신)
+5. 패러다임 불일치 해결
+
+### 조회
+1. DAO에서 pk값을 넘긴다.
+2. JPA가 적절한 SELECT SQL생성
+3. JDBC API사용해서 DB에 보내서 값을 반환받는다.
+4. ResultSet 맵핑 (객체에 맵핑)
+5. 패러다임 불일치 해결
+6. DAO에 객체 반환
+
+## JPA와 CRUD
+- 저장: jpa.persist(object)
+  ```
+    //저장  
+   Member member = new Member();  
+   member.setId(2L);  
+   member.setName("helloB");  
+   em.persist(member); //저장
+  ```
+
+- 조회: Object object = jap.find(objectId)
+  ```
+  //수정  
+  Member findMember = em.find(Member.class, 2L); //데이터 조회  
+  ```
+- 수정: object.setName("변경할 이름")
+  ```
+  //수정  
+  Member findMember = em.find(Member.class, 2L); //수정할 데이터 조회  
+  findMember.setName("HelloJPA");  
+  //수정시에는 따로 저장 안해도 됨
+  ```
+- 삭제: jpa.remove(object)
+  ```
+  Member findMember = em.find(Member.class, 2L);
+  em.remove(findMember);삭제
+  ```
+
