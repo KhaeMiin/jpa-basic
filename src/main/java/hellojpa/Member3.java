@@ -20,6 +20,16 @@ public class Member3 {
     @JoinColumn(name = "TEAM_ID") //FK 외래 키가 있는 곳이 주인(수정, 등록 가능) 외래키가 있는 쪽이 Many가 된다.
     private Team team;
 
+    //일대일 (다대일과 유사하다.)
+    //다대일처럼 외래키가 있는 쪽이 주인(양방향의 경우) 직관적으로! 외래키가 있는 쪽을 주인으로 잡으면 된다.(쉽게 생각하자)
+    //현재는 Member3이 주인이다. 이러나 추후 한명의 회원이 여러가지 락커를 가질 수 있다는 요구조건이 추가될 수 있으므로
+    //락커를 주인으로 하는 것이 좋다. (락커가 주인으로 다대일 맵핑 수정이 가능하다. > uni만 제외하면 됨
+    //사실 이런 단순한 부분은 걍 양방향 거는게 좋을 거 같다.
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
+
     public Long getId() {
         return id;
     }

@@ -1,6 +1,5 @@
-package jpabook.jpashop;
+package hellojpa;
 
-import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 
@@ -9,10 +8,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class JpaMain2 {
+public class JpaMain3 {
 
     public static void main(String[] args) {
-/*        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
         EntityManager em = emf.createEntityManager();
 
@@ -21,8 +20,6 @@ public class JpaMain2 {
 
         try {
 
-            Order order = new Order();
-            order.addOrderItem(new OrderItem()); //양방향시
             
 
             tx.commit();
@@ -32,6 +29,6 @@ public class JpaMain2 {
             em.close();
         }
 
-        emf.close();*/
+        emf.close();
     }
 }
