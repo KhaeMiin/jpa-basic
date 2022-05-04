@@ -20,6 +20,10 @@ public class Order {
     @JoinColumn(name = "MEMBER_ID") //name 속성에는 매핑할 외래 키 이름 지정
     private Member member;
 
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
+
     //양방향으로 갈 경우(이 경우는 유용하게 쓸 거 같음)
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
