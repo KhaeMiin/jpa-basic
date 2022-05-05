@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
 public class JpaMain3 {
 
     public static void main(String[] args) {
-/*        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
         EntityManager em = emf.createEntityManager();
 
@@ -20,7 +20,19 @@ public class JpaMain3 {
 
         try {
 
-            
+            Movie movie = new Movie();
+            movie.setDirector("aaa");
+            movie.setActor("bbb");
+            movie.setName("바람과함꼐사라지다");
+            movie.setPrice(100000);
+
+            em.persist(movie);
+
+            em.flush();
+            em.clear();
+
+            Movie findMovie = em.find(Movie.class, movie.getId());
+            System.out.println("findMovie = " + findMovie);
 
             tx.commit();
         } catch (Exception e) {
@@ -29,6 +41,6 @@ public class JpaMain3 {
             em.close();
         }
 
-        emf.close();*/
+        emf.close();
     }
 }
