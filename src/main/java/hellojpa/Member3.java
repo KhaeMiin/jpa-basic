@@ -1,11 +1,12 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity //JPA가 사용하는 클래스라는 것을 인식,
-public class Member3 {
+public class Member3 extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -35,7 +36,6 @@ public class Member3 {
     @ManyToMany
     @JoinTable(name = "MEMBER_PRODUCT")
     private List<Product> products = new ArrayList<>();
-
 
     public Long getId() {
         return id;
