@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Item {
+@Inheritance(strategy = InheritanceType.JOINED)//상속
+@DiscriminatorColumn
+public abstract class Item extends BaseEntity2 {
 
     @Id @GeneratedValue
     @Column(name = "ITEM_ID")

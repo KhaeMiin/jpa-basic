@@ -28,9 +28,9 @@ public class Member3 extends BaseEntity {
     //현재는 Member3이 주인이다. 이러나 추후 한명의 회원이 여러가지 락커를 가질 수 있다는 요구조건이 추가될 수 있으므로
     //락커를 주인으로 하는 것이 좋다. (락커가 주인으로 다대일 맵핑 수정이 가능하다. > uni만 제외하면 됨
     //사실 이런 단순한 부분은 걍 양방향 거는게 좋을 거 같다.
-    @OneToOne
+/*    @OneToOne
     @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
+    private Locker locker;*/
 
     //다대다
     @ManyToMany

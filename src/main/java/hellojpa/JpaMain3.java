@@ -1,13 +1,9 @@
 package hellojpa;
 
-import jpabook.jpashop.domain.Order;
-import jpabook.jpashop.domain.OrderItem;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.time.LocalDateTime;
 
 public class JpaMain3 {
 
@@ -21,27 +17,18 @@ public class JpaMain3 {
 
         try {
 
-            /*Movie movie = new Movie();
-            movie.setDirector("aaa");
-            movie.setActor("bbb");
-            movie.setName("바람과함꼐사라지다");
-            movie.setPrice(100000);
-
-            em.persist(movie);*/
-
             Member3 member = new Member3();
-            member.setUsername("user1");
-            member.setCreateBy("kim");
-            member.setCreateDate(LocalDateTime.now());
-
+            member.setUsername("hello");
+            
             em.persist(member);
-
-
+            
             em.flush();
             em.clear();
 
-/*            Movie findMovie = em.find(Movie.class, movie.getId());
-            System.out.println("findMovie = " + findMovie);*/
+//            Member3 findMember = em.find(Member3.class, member.getId());
+            Member3 findMember = em.getReference(Member3.class, member.getId()); //프록시사용
+            System.out.println("findMember = " + findMember.getUsername());
+            System.out.println("findMember.getId() = " + findMember.getId());//내부적으로 영속성컨텍스트에 요청(DB조회) 실제 Entity생성 후 프록시의 target 저장
 
             tx.commit();
         } catch (Exception e) {
@@ -52,4 +39,5 @@ public class JpaMain3 {
 
         emf.close();
     }
+
 }

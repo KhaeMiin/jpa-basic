@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Member {
+public class Member extends BaseEntity2 {
 
     @Id @GeneratedValue //(strategy = GenerationType.AUTO) > 생략시 기본값
     @Column(name = "MEMBER_ID")
